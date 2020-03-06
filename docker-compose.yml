@@ -1,0 +1,16 @@
+version: '2'
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:v2.2
+    # Enables the web UI and tells Traefik to listen to docker
+    command: --api.insecure=true --providers.docker --entryPoints.websecure.address=:443 --certificatesResolvers.myresolver.acme.email=tomas@harkema.io --certificatesResolvers.myresolver.acme.dnsChallenge.provider=cloudflare --ping=true --log.level=DEBUG --serverstransport.insecureskipverify=true --accesslog=true --metrics=true --tracing=true --metrics.influxdb=true --metrics.influxdb.address=192.168.1.101:8089
+        ports:
+      # The HTTP(S) ports
+      - "80:80"
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
