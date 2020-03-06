@@ -4,7 +4,7 @@ services:
     # The official v2 Traefik docker image
     image: traefik:v2.2
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.insecure=true --providers.docker --entryPoints.websecure.address=:443 --certificatesResolvers.myresolver.acme.email=techops@q42.nl --certificatesResolvers.myresolver.acme.dnsChallenge.provider=cloudflare --ping=true --log.level=DEBUG --serverstransport.insecureskipverify=true --accesslog=true --metrics=true --tracing=true
+    command: --api.insecure=true --providers.docker --entryPoints.websecure.address=:443 --certificatesResolvers.myresolver.acme.email=techops@q42.nl --certificatesResolvers.myresolver.acme.dnsChallenge.provider=cloudflare --ping=true --log.level=DEBUG --serverstransport.insecureskipverify=true
     ports:
       # The HTTP(S) ports
       - "80:80"
